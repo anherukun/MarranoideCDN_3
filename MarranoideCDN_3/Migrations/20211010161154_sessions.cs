@@ -26,28 +26,28 @@ namespace MarranoideCDN_3.Migrations
                 keyColumn: "IDAccount",
                 keyValue: "513E4F4B-2360-40EC-B342-33A043AB02EA",
                 column: "CreatedAt",
-                value: new DateTime(2021, 10, 9, 18, 43, 48, 659, DateTimeKind.Local).AddTicks(2465));
+                value: new DateTime(2021, 10, 10, 11, 11, 53, 931, DateTimeKind.Local).AddTicks(8178));
 
             migrationBuilder.UpdateData(
                 table: "Accounts",
                 keyColumn: "IDAccount",
                 keyValue: "62F36B2A-F1F8-4399-942F-4190771F9FCD",
                 column: "CreatedAt",
-                value: new DateTime(2021, 10, 9, 18, 43, 48, 659, DateTimeKind.Local).AddTicks(2359));
+                value: new DateTime(2021, 10, 10, 11, 11, 53, 931, DateTimeKind.Local).AddTicks(8101));
 
             migrationBuilder.UpdateData(
                 table: "Accounts",
                 keyColumn: "IDAccount",
                 keyValue: "66CA7A17-E182-498F-AC3C-7AC25AD7ACD1",
                 column: "CreatedAt",
-                value: new DateTime(2021, 10, 9, 18, 43, 48, 656, DateTimeKind.Local).AddTicks(8949));
+                value: new DateTime(2021, 10, 10, 11, 11, 53, 930, DateTimeKind.Local).AddTicks(2661));
 
             migrationBuilder.UpdateData(
                 table: "Accounts",
                 keyColumn: "IDAccount",
                 keyValue: "8A5AC66A-C705-471F-B508-66D4A036176D",
                 column: "CreatedAt",
-                value: new DateTime(2021, 10, 9, 18, 43, 48, 659, DateTimeKind.Local).AddTicks(2429));
+                value: new DateTime(2021, 10, 10, 11, 11, 53, 931, DateTimeKind.Local).AddTicks(8152));
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

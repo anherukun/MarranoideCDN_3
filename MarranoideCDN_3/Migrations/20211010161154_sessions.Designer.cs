@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarranoideCDN_3.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20211009234349_sessions")]
+    [Migration("20211010161154_sessions")]
     partial class sessions
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,7 +53,7 @@ namespace MarranoideCDN_3.Migrations
                         new
                         {
                             IDAccount = "66CA7A17-E182-498F-AC3C-7AC25AD7ACD1",
-                            CreatedAt = new DateTime(2021, 10, 9, 18, 43, 48, 656, DateTimeKind.Local).AddTicks(8949),
+                            CreatedAt = new DateTime(2021, 10, 10, 11, 11, 53, 930, DateTimeKind.Local).AddTicks(2661),
                             Email = "example1@email.com",
                             IDUserRol = "DA1D0C4A-1D4E-4B56-939E-AB9548DE5352",
                             PasswordHash = "01539fb331b8a8bd631f701705d382aebfa1230feff3b3b35084b3a4938b6f70",
@@ -62,7 +62,7 @@ namespace MarranoideCDN_3.Migrations
                         new
                         {
                             IDAccount = "62F36B2A-F1F8-4399-942F-4190771F9FCD",
-                            CreatedAt = new DateTime(2021, 10, 9, 18, 43, 48, 659, DateTimeKind.Local).AddTicks(2359),
+                            CreatedAt = new DateTime(2021, 10, 10, 11, 11, 53, 931, DateTimeKind.Local).AddTicks(8101),
                             Email = "example2@email.com",
                             IDUserRol = "29F858BF-BEA3-48CA-B4F2-876BF3469B4F",
                             PasswordHash = "01539fb331b8a8bd631f701705d382aebfa1230feff3b3b35084b3a4938b6f70",
@@ -71,7 +71,7 @@ namespace MarranoideCDN_3.Migrations
                         new
                         {
                             IDAccount = "8A5AC66A-C705-471F-B508-66D4A036176D",
-                            CreatedAt = new DateTime(2021, 10, 9, 18, 43, 48, 659, DateTimeKind.Local).AddTicks(2429),
+                            CreatedAt = new DateTime(2021, 10, 10, 11, 11, 53, 931, DateTimeKind.Local).AddTicks(8152),
                             Email = "example3@email.com",
                             IDUserRol = "29F858BF-BEA3-48CA-B4F2-876BF3469B4F",
                             PasswordHash = "13267d10aec9b7f71b7546275f106c7dfdc83fc1a55035811c056323dda021ea",
@@ -80,7 +80,7 @@ namespace MarranoideCDN_3.Migrations
                         new
                         {
                             IDAccount = "513E4F4B-2360-40EC-B342-33A043AB02EA",
-                            CreatedAt = new DateTime(2021, 10, 9, 18, 43, 48, 659, DateTimeKind.Local).AddTicks(2465),
+                            CreatedAt = new DateTime(2021, 10, 10, 11, 11, 53, 931, DateTimeKind.Local).AddTicks(8178),
                             Email = "angel.g.j.reyes@gmail.com",
                             IDUserRol = "DA1D0C4A-1D4E-4B56-939E-AB9548DE5352",
                             PasswordHash = "7de7815844734a12679628fb3a3335223311c4adc74a623f72f8c89e6cb7bcc3",

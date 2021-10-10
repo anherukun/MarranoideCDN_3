@@ -3,6 +3,7 @@ using MarranoideCDN_3.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace MarranoideCDN_3.Services
@@ -57,6 +58,14 @@ namespace MarranoideCDN_3.Services
             }
         }
 
+        public static Session Get(Expression<Func<Session, bool>> predicate)
+        {
+            using (var db = new Context())
+            {
+                return db.Sessions.Single(predicate);
+            }
+        }
+
         /// <summary>
         /// Compueba que el token asignado sea el correcto
         /// </summary>
@@ -67,7 +76,14 @@ namespace MarranoideCDN_3.Services
         {
             using (var db = new Context())
             {
-                return db.Sessions.Single(x => x.SessionToken == sessionToken && x.IDAccount == idAccount) != null ? true : false;
+                if (Exist(idAccount))
+                {
+                    var session = db.Sessions.Single(x => x.IDAccount == idAccount);
+
+                    if (session != null)
+                        return session.SessionToken == sessionToken;
+                }
+                return false;
             }
         }
         /// <summary>

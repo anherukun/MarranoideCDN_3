@@ -16,18 +16,29 @@ namespace MarranoideCDN_3.Controllers
             return Redirect(Url.Action("Index", "Home"));
         }
 
-        public ActionResult Login()
+        public IActionResult Login()
         {
 
             return View();
         }
+        public IActionResult Logout(string sessionToken)
+        {
+            Session session = RepoSessions.Get(x => x.SessionToken == sessionToken);
+            session.SessionToken = null;
+            RepoSessions.Update(session);
 
-        public ActionResult Register()
+            HttpContext.Response.Cookies.Delete("sessionToken");
+            HttpContext.Response.Cookies.Delete("IDaccount");
+            return Redirect(Url.Action("Index", "Home"));
+        }
+
+        public IActionResult Register()
         {
             return View();
         }
 
-        public ActionResult SubmitLogin(string Username, string Password)
+        [HttpPost]
+        public IActionResult SubmitLogin(string Username, string Password)
         {
             if (RepoAccounts.IsPasswordCorrect(Username, Password))
             {

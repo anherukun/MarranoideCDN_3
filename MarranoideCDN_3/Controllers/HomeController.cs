@@ -1,5 +1,6 @@
 ﻿using MarranoideCDN_3.Application;
 using MarranoideCDN_3.Models;
+using MarranoideCDN_3.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -21,7 +22,11 @@ namespace MarranoideCDN_3.Controllers
 
         public IActionResult Index()
         {
-            ViewBag["session"] = new Session() { IDAccount = HttpContext.Request.Cookies["IDaccount"], SessionToken = HttpContext.Request.Cookies["sessionToken"] };
+            if (HttpContext.Request.Cookies.Keys.Contains("IDaccount") && HttpContext.Request.Cookies.Keys.Contains("sessionToken"))
+                if (RepoSessions.OnSession(HttpContext.Request.Cookies["sessionToken"], HttpContext.Request.Cookies["IDaccount"]))
+                    ViewData["session"] = new Session() { IDAccount = HttpContext.Request.Cookies["IDaccount"], SessionToken = HttpContext.Request.Cookies["sessionToken"] };
+
+
             return View();
         }
 
