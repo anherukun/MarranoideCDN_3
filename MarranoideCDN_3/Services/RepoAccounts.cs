@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace MarranoideCDN_3.Services
@@ -59,20 +60,42 @@ namespace MarranoideCDN_3.Services
                     IDUserRol = x.IDUserRol,
                     UserRol = x.UserRol,
                     CreatedAt = x.CreatedAt
-                }).Single(x => x.IDAccount == id) ;
+                }).Single(x => x.IDAccount == id);
             }
         }
         /// <summary>
-        /// Comparador de contraseñas
+        /// Obtiene una entidad
         /// </summary>
-        /// <param name="id">ID de la cuenta</param>
-        /// <param name="value">Cadena de comparacion</param>
-        /// <returns>True: si es correcta. False: si es incorrecta</returns>
-        public static bool IsPasswordCorrect(string id, string value)
+        /// <param name="predicate">Expresion LINQ</param>
+        /// <returns><see cref="Account"/></returns>
+        public static Account Get(Expression<Func<Account, bool>> predicate)
         {
             using (var db = new Context())
             {
-                return db.Accounts.Single(x => x.IDAccount == id).PasswordHash == Security.SHA256Hash(value) ? true : false;
+                return db.Accounts.Include(x => x.UserRol).Select(x => new Account
+                {
+                    IDAccount = x.IDAccount,
+                    Email = x.Email,
+                    Username = x.Username,
+                    IDUserRol = x.IDUserRol,
+                    UserRol = x.UserRol,
+                    CreatedAt = x.CreatedAt
+                }).Single(predicate);
+            }
+        }
+
+        /// <summary>
+        /// Comparador de contraseñas
+        /// </summary>
+        /// <param name="username">Usuario de la cuenta</param>
+        /// <param name="value">Cadena de comparacion</param>
+        /// <returns>True: si es correcta. False: si es incorrecta</returns>
+        public static bool IsPasswordCorrect(string username, string value)
+        {
+            using (var db = new Context())
+            {
+                var account = db.Accounts.Single(x => x.Username == username);
+                return account.PasswordHash == Security.SHA256Hash(value) ? true : false;
             }
         }
     }

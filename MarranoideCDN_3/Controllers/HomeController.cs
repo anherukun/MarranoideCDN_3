@@ -21,6 +21,7 @@ namespace MarranoideCDN_3.Controllers
 
         public IActionResult Index()
         {
+            ViewBag["session"] = new Session() { IDAccount = HttpContext.Request.Cookies["IDaccount"], SessionToken = HttpContext.Request.Cookies["sessionToken"] };
             return View();
         }
 
