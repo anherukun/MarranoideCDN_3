@@ -26,7 +26,11 @@ namespace MarranoideCDN_3.Controllers.API
         {
             return Ok(RepoAccounts.Get(id));
         }
-
+        [HttpGet("Username/{username}")]
+        public IActionResult GetByUsername(string username)
+        {
+            return Ok(RepoAccounts.Get(x => x.Username == username));
+        }
         // POST api/<AccountsController>
         [HttpPost]
         public void Post([FromBody] string value)

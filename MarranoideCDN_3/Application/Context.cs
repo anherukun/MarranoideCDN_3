@@ -1,4 +1,5 @@
 ﻿using MarranoideCDN_3.Models;
+using MarranoideCDN_3.Models.Minecraft;
 using MarranoideCDN_3.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,6 +20,9 @@ namespace MarranoideCDN_3.Application
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<UserRol> UserRols { get; set; }
         public virtual DbSet<Session> Sessions { get; set; }
+        public virtual DbSet<Item> MinecraftItems { get; set; }
+        public virtual DbSet<EnchantCategory> MinecraftEnchantCategories { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,13 +38,22 @@ namespace MarranoideCDN_3.Application
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<UserRol>().ToTable("UserRols");
-            modelBuilder.Entity<UserRol>().HasIndex(x => x.UserLevel);
+            modelBuilder.Entity<UserRol>().HasIndex(x => x.UserLevel).IsUnique();
             SeedUserRols(modelBuilder);
 
             modelBuilder.Entity<Account>().ToTable("Accounts");
+            modelBuilder.Entity<Account>().HasIndex(x => x.Email).IsUnique();
+            modelBuilder.Entity<Account>().HasIndex(x => x.Username).IsUnique();
             SeedAccounts(modelBuilder);
 
             modelBuilder.Entity<Session>().ToTable("Sessions");
+
+            modelBuilder.Entity<Item>().ToTable("MinecraftItems");
+            modelBuilder.Entity<Item>().HasIndex(x => x.ItemIndex).IsUnique();
+            modelBuilder.Entity<Item>().HasIndex(x => x.Name).IsUnique();
+
+            modelBuilder.Entity<EnchantCategory>().ToTable("MinecraftEnchantCategories");
+            modelBuilder.Entity<EnchantCategory>().HasIndex(x => x.Name).IsUnique();
         }
 
         private void SeedUserRols(ModelBuilder modelBuilder)

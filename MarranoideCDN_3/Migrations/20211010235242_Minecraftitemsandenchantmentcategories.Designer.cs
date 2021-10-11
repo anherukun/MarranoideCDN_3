@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarranoideCDN_3.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20211010161154_sessions")]
-    partial class sessions
+    [Migration("20211010235242_Minecraftitemsandenchantmentcategories")]
+    partial class Minecraftitemsandenchantmentcategories
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,6 +18,21 @@ namespace MarranoideCDN_3.Migrations
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.10");
+
+            modelBuilder.Entity("EnchantCategoryItem", b =>
+                {
+                    b.Property<string>("EnchantCategoriesIDEnchantCategory")
+                        .HasColumnType("varchar(767)");
+
+                    b.Property<string>("ItemsIDItem")
+                        .HasColumnType("varchar(767)");
+
+                    b.HasKey("EnchantCategoriesIDEnchantCategory", "ItemsIDItem");
+
+                    b.HasIndex("ItemsIDItem");
+
+                    b.ToTable("EnchantCategoryItem");
+                });
 
             modelBuilder.Entity("MarranoideCDN_3.Models.Account", b =>
                 {
@@ -29,7 +44,7 @@ namespace MarranoideCDN_3.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(767)");
 
                     b.Property<string>("IDUserRol")
                         .IsRequired()
@@ -41,11 +56,17 @@ namespace MarranoideCDN_3.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(767)");
 
                     b.HasKey("IDAccount");
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
                     b.HasIndex("IDUserRol");
+
+                    b.HasIndex("Username")
+                        .IsUnique();
 
                     b.ToTable("Accounts");
 
@@ -53,7 +74,7 @@ namespace MarranoideCDN_3.Migrations
                         new
                         {
                             IDAccount = "66CA7A17-E182-498F-AC3C-7AC25AD7ACD1",
-                            CreatedAt = new DateTime(2021, 10, 10, 11, 11, 53, 930, DateTimeKind.Local).AddTicks(2661),
+                            CreatedAt = new DateTime(2021, 10, 10, 18, 52, 41, 643, DateTimeKind.Local).AddTicks(6775),
                             Email = "example1@email.com",
                             IDUserRol = "DA1D0C4A-1D4E-4B56-939E-AB9548DE5352",
                             PasswordHash = "01539fb331b8a8bd631f701705d382aebfa1230feff3b3b35084b3a4938b6f70",
@@ -62,7 +83,7 @@ namespace MarranoideCDN_3.Migrations
                         new
                         {
                             IDAccount = "62F36B2A-F1F8-4399-942F-4190771F9FCD",
-                            CreatedAt = new DateTime(2021, 10, 10, 11, 11, 53, 931, DateTimeKind.Local).AddTicks(8101),
+                            CreatedAt = new DateTime(2021, 10, 10, 18, 52, 41, 646, DateTimeKind.Local).AddTicks(2939),
                             Email = "example2@email.com",
                             IDUserRol = "29F858BF-BEA3-48CA-B4F2-876BF3469B4F",
                             PasswordHash = "01539fb331b8a8bd631f701705d382aebfa1230feff3b3b35084b3a4938b6f70",
@@ -71,7 +92,7 @@ namespace MarranoideCDN_3.Migrations
                         new
                         {
                             IDAccount = "8A5AC66A-C705-471F-B508-66D4A036176D",
-                            CreatedAt = new DateTime(2021, 10, 10, 11, 11, 53, 931, DateTimeKind.Local).AddTicks(8152),
+                            CreatedAt = new DateTime(2021, 10, 10, 18, 52, 41, 646, DateTimeKind.Local).AddTicks(3044),
                             Email = "example3@email.com",
                             IDUserRol = "29F858BF-BEA3-48CA-B4F2-876BF3469B4F",
                             PasswordHash = "13267d10aec9b7f71b7546275f106c7dfdc83fc1a55035811c056323dda021ea",
@@ -80,12 +101,64 @@ namespace MarranoideCDN_3.Migrations
                         new
                         {
                             IDAccount = "513E4F4B-2360-40EC-B342-33A043AB02EA",
-                            CreatedAt = new DateTime(2021, 10, 10, 11, 11, 53, 931, DateTimeKind.Local).AddTicks(8178),
+                            CreatedAt = new DateTime(2021, 10, 10, 18, 52, 41, 646, DateTimeKind.Local).AddTicks(3085),
                             Email = "angel.g.j.reyes@gmail.com",
                             IDUserRol = "DA1D0C4A-1D4E-4B56-939E-AB9548DE5352",
                             PasswordHash = "7de7815844734a12679628fb3a3335223311c4adc74a623f72f8c89e6cb7bcc3",
                             Username = "Mithyck"
                         });
+                });
+
+            modelBuilder.Entity("MarranoideCDN_3.Models.Minecraft.EnchantCategory", b =>
+                {
+                    b.Property<string>("IDEnchantCategory")
+                        .HasColumnType("varchar(767)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(767)");
+
+                    b.HasKey("IDEnchantCategory");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("MinecraftEnchantCategories");
+                });
+
+            modelBuilder.Entity("MarranoideCDN_3.Models.Minecraft.Item", b =>
+                {
+                    b.Property<string>("IDItem")
+                        .HasColumnType("varchar(767)");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ItemIDItem")
+                        .HasColumnType("varchar(767)");
+
+                    b.Property<int>("ItemIndex")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(767)");
+
+                    b.Property<int>("Stacksize")
+                        .HasColumnType("int");
+
+                    b.HasKey("IDItem");
+
+                    b.HasIndex("ItemIDItem");
+
+                    b.HasIndex("ItemIndex")
+                        .IsUnique();
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("MinecraftItems");
                 });
 
             modelBuilder.Entity("MarranoideCDN_3.Models.Session", b =>
@@ -126,7 +199,8 @@ namespace MarranoideCDN_3.Migrations
 
                     b.HasKey("IDUserRol");
 
-                    b.HasIndex("UserLevel");
+                    b.HasIndex("UserLevel")
+                        .IsUnique();
 
                     b.ToTable("UserRols");
 
@@ -154,6 +228,21 @@ namespace MarranoideCDN_3.Migrations
                         });
                 });
 
+            modelBuilder.Entity("EnchantCategoryItem", b =>
+                {
+                    b.HasOne("MarranoideCDN_3.Models.Minecraft.EnchantCategory", null)
+                        .WithMany()
+                        .HasForeignKey("EnchantCategoriesIDEnchantCategory")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MarranoideCDN_3.Models.Minecraft.Item", null)
+                        .WithMany()
+                        .HasForeignKey("ItemsIDItem")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("MarranoideCDN_3.Models.Account", b =>
                 {
                     b.HasOne("MarranoideCDN_3.Models.UserRol", "UserRol")
@@ -163,6 +252,18 @@ namespace MarranoideCDN_3.Migrations
                         .IsRequired();
 
                     b.Navigation("UserRol");
+                });
+
+            modelBuilder.Entity("MarranoideCDN_3.Models.Minecraft.Item", b =>
+                {
+                    b.HasOne("MarranoideCDN_3.Models.Minecraft.Item", null)
+                        .WithMany("FixedWith")
+                        .HasForeignKey("ItemIDItem");
+                });
+
+            modelBuilder.Entity("MarranoideCDN_3.Models.Minecraft.Item", b =>
+                {
+                    b.Navigation("FixedWith");
                 });
 #pragma warning restore 612, 618
         }

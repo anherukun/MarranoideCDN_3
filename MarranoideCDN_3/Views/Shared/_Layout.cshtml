@@ -36,8 +36,9 @@
                     <ul class="navbar-nav">
                         @if (session != null)
                         {
+                            Account account = MarranoideCDN_3.Services.RepoAccounts.Get(session.IDAccount);
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="@Url.Action("", "")">Account</a>
+                                <a class="nav-link text-dark" href="@Url.Action("", "")">Hi, @account.Username</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" href="@Url.Action("Logout", "Identity", new { sessionToken = session.SessionToken })">Logout</a>
